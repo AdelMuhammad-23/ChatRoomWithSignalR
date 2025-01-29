@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat</h2>
+        </div>
+        <div class="chat-body">
+            <div class="chat-messages" id="chat-messages">
+            </div>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="Input text" />
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script>
+        name = prompt("Enter your name");
+        // تعريف الاتصال
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .build();
+
+        // start connection
+        connection.start()
+            .then(() => {
+                console.log("SignalR connection established.");
+            })
+            .catch((err) => {
+                console.error("Error connecting to SignalR: ", err.toString());
+
+
+            alert("Connection is start");
+
+            });
+        // call back func
+        connection.on("newMessage", function (user, message) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.textContent = `${user}: ${message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+
+            alert("message brodcast from server is start");
+
+        });
+
+
+        // define func to consume server
+        const sendButton = document.getElementById('send-button');
+        const messageInput = document.getElementById('message-input');
+
+        sendButton.addEventListener('click', function () {
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                connection.invoke("SendMessage", name , message)
+                    .catch(function (err) {
+                        console.error("Error sending message: ", err.toString());
+                    });
+                messageInput.value = '';
+            }
+
+
+            alert("send message to server is start");
+
+        });
+
+        messageInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
