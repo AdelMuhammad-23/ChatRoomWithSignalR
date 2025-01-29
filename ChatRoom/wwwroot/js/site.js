@@ -23,16 +23,13 @@
             messageInput.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // يمكنك هنا إضافة كود لإرسال الرسالة إلى الخادم أو أي مكان آخر
         }
     }
 
-    // دالة لإضافة رسائل وهمية (للتجربة)
     function addSampleMessages() {
         const sampleMessages = [
-            'مرحبًا!',
-            'كيف حالك؟',
-            'هل يمكنك مساعدتي؟'
+            'Hello!',
+            'How are you?',
         ];
 
         sampleMessages.forEach(message => {
@@ -45,6 +42,5 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // إضافة رسائل وهمية عند تحميل الصفحة
     addSampleMessages();
 });

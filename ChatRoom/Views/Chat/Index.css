@@ -1,5 +1,4 @@
-﻿/* Reset بعض العناصر الأساسية */
-* {
+﻿* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    direction: rtl; /* لأن النص بالعربية */
+    direction: rtl;
 }
 
 .chat-container {

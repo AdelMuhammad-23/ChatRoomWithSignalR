@@ -23,7 +23,7 @@
     <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
     <script>
         name = prompt("Enter your name");
-        // تعريف الاتصال
+        // define connection
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/chat")
             .build();
